@@ -33,3 +33,15 @@ myPair = ("One", 2)
 zipped = zip [1,2,3] ['a', 'b', 'c']
 zippedInfinite = zip [1..] ['a'..]
 generatedTuple = [(x,y) | x <- [1..10], y <- [0..x], x + y == 5]
+
+generateSubsets :: [a] -> [[a]]
+generateSubsets [] = [[]]
+generateSubsets (e:es) = 
+    let
+        computedSubSets = generateSubsets es
+    in  
+        prependElToSubsets e computedSubSets ++ computedSubSets
+    where
+        prependElToSubsets e subsets = map (\subset -> e : subset) subsets
+    
+
